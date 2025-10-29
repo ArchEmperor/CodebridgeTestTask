@@ -1,0 +1,6 @@
+@CodebridgeTestTask_HostAddress = http://localhost:5003
+
+GET {{CodebridgeTestTask_HostAddress}}/ping
+
+
+
