@@ -8,7 +8,7 @@ namespace CodebridgeTestTask.Controllers;
 
 [ApiController]
 [Route("/")]
-public class DogsController(DogsService dogs) : ControllerBase
+public class DogsController(IDogsService dogs) : ControllerBase
 {
     Dictionary<string, Dog> orderBy = new Dictionary<string, Dog>();
     private const string Version = "Dogshouseservice.Version1.0.1";

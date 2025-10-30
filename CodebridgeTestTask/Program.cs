@@ -16,7 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options=>
     options.UseNpgsql(builder.Configuration.
         GetConnectionString("Postgres")));
 builder.Services.AddScoped<IDogsRepository, DogsRepository>();
-builder.Services.AddScoped<DogsService>();
+builder.Services.AddScoped<IDogsService,DogsService>();
 var requestsPerSecond = builder.Configuration.GetValue<int>(
     "RateLimiting:RequestsPerSecond", 10);
 builder.Services.AddGlobalRateLimiting(requestsPerSecond);

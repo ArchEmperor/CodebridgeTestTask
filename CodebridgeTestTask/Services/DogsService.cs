@@ -3,7 +3,7 @@ using CodebridgeTestTask.Repositories;
 
 namespace CodebridgeTestTask.Services;
 
-public class DogsService(IDogsRepository repository)
+public class DogsService(IDogsRepository repository): IDogsService
 {
     public async Task<List<Dog>> GetDogsAsync(string? attribute="name",string order="asc" ,int pageNumber=0, int pageSize=0)
     {
