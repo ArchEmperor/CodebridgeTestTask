@@ -1,5 +1,6 @@
 using CodebridgeTestTask.Data;
 using CodebridgeTestTask.Data.Entities;
+using CodebridgeTestTask.Middleware;
 using CodebridgeTestTask.Repositories;
 using CodebridgeTestTask.Services;
 using DotNetEnv;
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<AppDbContext>(options=>
         GetConnectionString("Postgres")));
 builder.Services.AddScoped<IDogsRepository, DogsRepository>();
 builder.Services.AddScoped<DogsService>();
+var requestsPerSecond = builder.Configuration.GetValue<int>(
+    "RateLimiting:RequestsPerSecond", 10);
+builder.Services.AddGlobalRateLimiting(requestsPerSecond);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -24,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRateLimiter();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
